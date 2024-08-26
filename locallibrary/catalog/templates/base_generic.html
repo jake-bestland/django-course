@@ -28,9 +28,7 @@
             <ul class="sidebar-nav">
               {% if user.is_authenticated %}
                 <li>User: {{ user.get_username }}</li>
-
-              <li><a href="{% url 'my-borrowed' %}">My Borrowed</a></li>
-
+                <li><a href="{% url 'my-borrowed' %}">My Borrowed</a></li>
                 <li>
                   <form id="logout-form" method="post" action="{% url 'logout' %}">
                     {% csrf_token %}
@@ -42,11 +40,11 @@
               {% endif %}
             </ul>
 
-              {% if user.is_staff %}
+              {% if perms.catalog.can_mark_returned %}
               <hr>
               <ul class=""sidebar-nav">
-                <li>Staff</li>
-                <li><a href="{% url 'all-borrowed' %}">All Borrowed</a></li>
+              <li>Staff</li>
+              <li><a href="{% url 'all-borrowed' %}">All Borrowed</a></li>
               </ul>
               {% endif %}            
           {% endblock %}
